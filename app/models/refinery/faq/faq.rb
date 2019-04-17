@@ -7,6 +7,9 @@ module Refinery
       validates :title, :presence => true, :uniqueness => true
       validates :body,  :presence => true
 
+      translates :title, :body
+
+
       # To enable admin searching, add acts_as_indexed on searchable fields, for example:
       #
       acts_as_indexed :fields => [:title]
@@ -24,6 +27,10 @@ module Refinery
         newest_first.live.includes(:categories).where(
             Refinery::Faq::Categorization.table_name => { :faq_category_id => nil }
         )
+      end
+
+      def self.translated
+        with_translations(::Globalize.locale)
       end
 
     end

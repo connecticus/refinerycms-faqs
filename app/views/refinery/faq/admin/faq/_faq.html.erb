@@ -1,8 +1,19 @@
 <li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(faq) -%>">
   <span class='title'>
     <%= faq.title %>
-
   </span>
+
+  <span class="preview">
+      <% faq.translations.each do |translation| %>
+        <% if translation.title.present? %>
+          <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
+                      refinery.edit_faq_admin_faq_path(faq, :switch_locale => translation.locale),
+                      :class => 'locale' %>
+          <% end %>
+      <% end %>
+  </span>
+
+
   <span class='actions'>
     
     <%= link_to refinery_icon_tag("application_go.png"), refinery.faq_faq_path(faq),
@@ -18,3 +29,4 @@
         :method => :delete %>
   </span>
 </li>
+

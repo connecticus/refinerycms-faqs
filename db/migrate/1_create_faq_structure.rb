@@ -31,6 +31,12 @@ class CreateFaqStructure < ActiveRecord::Migration
                                                            :migrate_data => true
                                                        })
 
+    Refinery::Faq::Faq.create_translation_table!({
+                                                          :title => :string, :body => :text
+                                                      }, {
+                                                          :migrate_data => true
+                                                      })
+
 
   end
 
